@@ -1,12 +1,70 @@
+body {
+    background: rgb(224,224,224);
+    background: radial-gradient(circle, rgba(224,224,224,1) 84%, rgba(255,230,251,0.929030987394958) 96%, rgba(249,211,251,1) 100%);
 
-/* 
-
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
-
-*/
+}
+.notepad {
+    background-color: white;
+    display: block;
+    width: 800px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    box-shadow: grey 0px 10px 20px 10px;
+    border: 1px solid rgb(159, 159, 159);
+}
+.notepad1 {
+    background-color: white;
+    display: block;
+    width: 790px;
+    height: 5px;
+    margin: auto;
+    border: 1px solid rgb(159, 159, 159);
+}
+.notepad2 {
+    background-color: white;
+    display: block;
+    width: 780px;
+    height: 5px;
+    margin: auto;
+    border: 1px solid rgb(159, 159, 159);
+    margin-bottom: 100px;
+}
+.todos-title {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 100px;
+    color: rgb(255, 202, 251);
+}
+.input-notes {
+    border: none;
+    width: 760px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.footer {
+    margin-bottom: 0%;
+    border-top: 1px solid rgb(255, 171, 248);
+    padding-top: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+.element {
+    border-top: 1px solid rgb(255, 171, 248);
+    vertical-align: middle;
+    padding-top: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.x-button {
+    visibility: hidden;
+    border: none;
+    border-radius: 20%;
+    float: right;
+}
+.element:hover .x-button {
+    visibility: visible;
+}
+.element:active .x-button {
+    visibility: visible;
+    background-color: red;
+}
