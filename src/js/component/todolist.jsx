@@ -2,21 +2,23 @@ import React, { useState, useEffect } from "react";
 
 const Todos = () => {
 	
-	const [newInput, setNewInput ] = useState('');
-	const [newTodo, setNewTodo ] = useState([]);
-	const [item, setItem ] = useState('items');
-	const [notask, setNotask ] = useState(<p>No tasks. Add a task.</p>);
+	const [ newInput, setNewInput ] = useState('');
+	const [ newTodo, setNewTodo ] = useState([]);
+	const [ item, setItem ] = useState('items');
+	const [ notask, setNotask ] = useState(<p>No tasks. Add a task.</p>);
 
-    function getTodos() {
+	
+    function getData() {
+		console.log('getdata')
         fetch('https://playground.4geeks.com/apis/fake/todos/user/amv87')
-        .then((response)=>response.json())
-        .then((data)=>getTodos(data.label))
+        .then((response) => response.json())
+        .then((data) => setData(data.label))
 
 
     }
     useEffect(()=>{
-        getTodos()
-        console.log('se cargo el todo')
+        getData()
+        console.log(item.label)
     })
 	
 	function addNewTodo() {
@@ -48,7 +50,7 @@ const Todos = () => {
 		<>
 			<div className="notepad">
 				<h1 className="todos-title">to-do's</h1>
-				<input className="input-notes" value={newInput} onKeyDown={(e) => (e.keyCode === 13 ? addNewTodo(e) : null)} onChange={(e)=>setNewInput(e.target.value)} placeholder="What needs to be done?" type="text" />
+				<input className="input-notes" value={newInput} onKeyDown={(e) => (e.keyCode === 13 && newInput !== '' ? addNewTodo(e) : null)} onChange={(e)=>setNewInput(e.target.value)} placeholder="What needs to be done?" type="text" />
 				{notask}
 				{newTodo.map((element, index) =><p className="element" key={index}>{element} <button className="x-button" onClick={()=>deleteTodo(index)} >⨉</button></p>)}
 				<p className="footer">{newTodo.length} {item} left</p>
