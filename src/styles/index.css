@@ -1,6 +1,6 @@
 body {
-    background: rgb(224,224,224);
-    background: radial-gradient(circle, rgba(224,224,224,1) 84%, rgba(255,230,251,0.929030987394958) 96%, rgba(249,211,251,1) 100%);
+    background: rgb(122,106,254);
+    background: radial-gradient(circle, rgba(122,106,254,1) 0%, rgba(45,173,253,1) 100%);
 
 }
 .notepad {
@@ -10,7 +10,7 @@ body {
     margin: auto;
     margin-top: 100px;
     padding: 20px;
-    box-shadow: grey 0px 10px 20px 10px;
+    box-shadow: rgb(243, 243, 179) 0px 10px 20px 10px;
     border: 1px solid rgb(159, 159, 159);
 }
 .notepad1 {
@@ -34,7 +34,7 @@ body {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 100px;
-    color: rgb(255, 202, 251);
+    color: rgb(158, 162, 248);
 }
 .input-notes {
     border: none;
@@ -45,12 +45,12 @@ body {
 }
 .footer {
     margin-bottom: 0%;
-    border-top: 1px solid rgb(255, 171, 248);
+    border-top: 1px solid rgb(158, 162, 248);
     padding-top: 16px;
     font-family: 'Roboto', sans-serif;
 }
 .element {
-    border-top: 1px solid rgb(255, 171, 248);
+    border-top: 1px solid rgb(158, 162, 248);
     vertical-align: middle;
     padding-top: 16px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
