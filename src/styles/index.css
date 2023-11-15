@@ -58,8 +58,9 @@ body {
 .x-button {
     visibility: hidden;
     border: none;
-    border-radius: 20%;
+    border-radius: 100%;
     float: right;
+    padding: 0px 8px 2px 8px;
 }
 .element:hover .x-button {
     visibility: visible;
