@@ -7,19 +7,28 @@ const Todos = () => {
 	const [ item, setItem ] = useState('items');
 	const [ notask, setNotask ] = useState(<p>No tasks. Add a task.</p>);
 
-	function putData() {
-		const requestOptions = {
+	function getData() {
+		const requestPut = {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify([{ "id":"0611f8fdc",  "label": "Do the replits", "done": false}])
 		};
-		fetch('https://playground.4geeks.com/apis/fake/todos/user/amv87', requestOptions)
+		fetch('https://playground.4geeks.com/apis/fake/todos/user/amv87', requestPut)
+			.then(response => response.json())
+			.then((data) => console.log(data))
+
+		const requestGet = {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify([])
+		};
+		fetch('https://playground.4geeks.com/apis/fake/todos/user/amv87', requestGet)
 			.then(response => response.json())
 			.then((data) => console.log(data))
 	}
 
     useEffect(()=>{
-		putData()
+		getData()
     }, [])
 	
 	function addNewTodo() {
@@ -55,7 +64,7 @@ const Todos = () => {
 				{notask}
 				{newTodo.map((element, index) =><p className="element" key={index}>{element} <button className="x-button" onClick={()=>deleteTodo(index)}>⨉</button></p>)}
 				<p className="footer">{newTodo.length} {item} left</p>
-				<button onClick={putData}></button>
+				<button onClick={getData}></button>
        		</div>
 			<div className="notepad1"></div>
 			<div className="notepad2"></div>
