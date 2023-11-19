@@ -7,7 +7,7 @@ const Todos = () => {
 	const [ item, setItem ] = useState('items');
 	const [ notask, setNotask ] = useState(<p>No tasks. Add a task.</p>);
 
-	function getData() {
+	function updateData() {
 		const requestPut = {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
@@ -16,7 +16,8 @@ const Todos = () => {
 		fetch('https://playground.4geeks.com/apis/fake/todos/user/amv87', requestPut)
 			.then(response => response.json())
 			.then((data) => console.log(data))
-
+	}
+	function getData() {
 		const requestGet = {
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' },
