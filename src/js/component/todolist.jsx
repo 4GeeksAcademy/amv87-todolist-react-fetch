@@ -6,7 +6,7 @@ const Todos = () => {
 	const [ newTodo, setNewTodo ] = useState([]);
 	const [ item, setItem ] = useState('items');
 	const [ notask, setNotask ] = useState(<p>No tasks. Add a task.</p>);
-
+	const [ newTodoapi, setNewTodoapi ] = useState([]);
 
 	function getData() {
 		const requestGet = {
@@ -17,9 +17,9 @@ const Todos = () => {
 		fetch('https://playground.4geeks.com/apis/fake/todos/user/amv87', requestGet)
 			.then(response => response.json())
 			.then((data) => console.log(data[0].label))
+			.then((data) => setNewTodoapi(data))
 			.then((data) => addNewTodo(data))
 	}
-	
 
     useEffect(()=>{
 		getData()
@@ -55,10 +55,11 @@ const Todos = () => {
 			<div className="notepad">
 				<h1 className="todos-title">to-do's</h1>
 				<input className="input-notes" value={newInput} onKeyDown={(e) => (e.keyCode === 13 && newInput !== '' ? addNewTodo(e) : null)} onChange={(e)=>setNewInput(e.target.value)} placeholder="What needs to be done?" type="text" />
+				{newTodoapi}
 				{notask}
 				{newTodo.map((element, index) =><p className="element" key={index}>{element} <button className="x-button" onClick={()=>deleteTodo(index)}>⨉</button></p>)}
 				<p className="footer">{newTodo.length} {item} left</p>
-				<button onClick={()=>getData()}></button>
+
        		</div>
 			<div className="notepad1"></div>
 			<div className="notepad2"></div>
