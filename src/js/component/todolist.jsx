@@ -1,65 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React , {useState, useEffect} from "react";
 
 const Todos = () => {
-	
-	const [ newInput, setNewInput ] = useState('');
-	const [ newTodo, setNewTodo ] = useState([]);
-	const [ item, setItem ] = useState('items');
-	const [ notask, setNotask ] = useState(<p>No tasks. Add a task.</p>);
-	const [ newTodoapi, setNewTodoapi ] = useState([]);
 
-	function getData() {
-		const requestGet = {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' },
-			redirect: 'follow'
+    const [newInput, setNewInput] = useState("");
+    const [newTodo, setNewTodo] = useState([]);
+
+	function createUser(){
+		var requestOptions = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify([])
 		};
-		fetch('https://playground.4geeks.com/apis/fake/todos/user/amv87', requestGet)
-			.then(response => response.json())
-			.then((data) => console.log(data[0].label))
-			.then((data) => setNewTodoapi(data))
-			.then((data) => addNewTodo(data))
+
+		fetch("https://playground.4geeks.com/apis/fake/todos/user/amv87", requestOptions)
+		.then(response => response.json())
 	}
 
-    useEffect(()=>{
-		getData()
-    }, [])
-	
-	function addNewTodo() {
-		setNewTodo(newTodo.concat(newInput))
-		setNewInput('')
-		if (newTodo.length === 0) {
-			setItem('item')
-			setNotask ('')
-		} else {
-			setItem('items')
-			setNotask ('')
-		}
-	}
+    function getTodos(){
+        fetch("https://playground.4geeks.com/apis/fake/todos/user/amv87")
+        .then(response => response.json())
+        .then(data => setNewTodo(data)) 
+    }
 
-	const deleteTodo = (index) => {
-		const eraseTodo = newTodo.filter((_, i) => i !== index);
-		setNewTodo(eraseTodo);
-		if (newTodo.length === 2) {
-			setItem('item')
-		} else if (newTodo.length === 1) {
-			setNotask (<p>No tasks. Add a task.</p>)
-			setItem('items')
-		} else {
-			setItem('items')
-		}
-	};
+    function  createTodo(){
+        var requestOptions = {
+            method: 'PUT',
+            headers:{ 'Content-Type': 'application/json' },
+            body: JSON.stringify(newTodo.concat( {"label": newInput, "done":false} ))
+        };
+            
+        fetch("https://playground.4geeks.com/apis/fake/todos/user/amv87", requestOptions)
+        .then(response => response.json())
+        .then(() => getTodos())
+        .then(setNewInput(''))
+    }
+
+    function deleteTodo(item){
+        var requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newTodo.filter(todo => todo !== item))
+            };
+            
+            fetch("https://playground.4geeks.com/apis/fake/todos/user/amv87", requestOptions)
+            .then(response => response.json())
+            .then(() => getTodos())
+    }
+      
+    useEffect (()=>{
+        createUser()
+        getTodos()
+    } ,[])
 
 	return (
 		<>
 			<div className="notepad">
 				<h1 className="todos-title">to-do's</h1>
-				<input className="input-notes" value={newInput} onKeyDown={(e) => (e.keyCode === 13 && newInput !== '' ? addNewTodo(e) : null)} onChange={(e)=>setNewInput(e.target.value)} placeholder="What needs to be done?" type="text" />
-				{newTodoapi}
-				{notask}
-				{newTodo.map((element, index) =><p className="element" key={index}>{element} <button className="x-button" onClick={()=>deleteTodo(index)}>⨉</button></p>)}
-				<p className="footer">{newTodo.length} {item} left</p>
-
+				<input
+                    className="input-notes"
+                    value={newInput}
+                    onKeyDown={(e) => (e.keyCode === 13 && newInput !== '' ? createTodo(e) : null)} 
+                    onChange={(e)=>setNewInput(e.target.value)}
+                    placeholder={newTodo.length === 1 ? 'No tasks, add a task' : 'What needs to be done?'}
+                />
+				{newTodo.map((item, index) =>
+                    <p className="element" key={index}>{item.label} <button className="x-button" onClick={()=>deleteTodo(item)}>⨉</button></p>)
+                }
+				<p className="footer">{newTodo.length} items left</p>
        		</div>
 			<div className="notepad1"></div>
 			<div className="notepad2"></div>
