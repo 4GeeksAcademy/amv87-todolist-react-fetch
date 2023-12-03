@@ -10,7 +10,7 @@ const Todos = () => {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify([])
-		};
+		}
 
 		fetch("https://playground.4geeks.com/apis/fake/todos/user/amv87", requestOptions)
 		.then(response => response.json())
@@ -26,8 +26,8 @@ const Todos = () => {
         var requestOptions = {
             method: 'PUT',
             headers:{ 'Content-Type': 'application/json' },
-            body: JSON.stringify(newTodo.concat( {"label": newInput, "done":false} ))
-        };
+            body: JSON.stringify(newTodo.concat({ "label": newInput, "done": false }))
+        }
             
         fetch("https://playground.4geeks.com/apis/fake/todos/user/amv87", requestOptions)
         .then(response => response.json())
@@ -40,7 +40,7 @@ const Todos = () => {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newTodo.filter(todo => todo !== item))
-            };
+            }
             
             fetch("https://playground.4geeks.com/apis/fake/todos/user/amv87", requestOptions)
             .then(response => response.json())
@@ -63,10 +63,10 @@ const Todos = () => {
                     onChange={(e)=>setNewInput(e.target.value)}
                     placeholder={newTodo.length === 1 ? 'No tasks, add a task' : 'What needs to be done?'}
                 />
-				{newTodo.map((item, index) =>
-                    <p className="element" key={index}>{item.label} <button className="x-button" onClick={()=>deleteTodo(item)}>⨉</button></p>)
-                }
-				<p className="footer">{newTodo.length} items left</p>
+				{newTodo.map((item) =>
+                    <p className="element" key={item.id}>{item.label}<button className="x-button" onClick={()=>deleteTodo(item)}>⨉</button></p>
+                )}
+				<p className="footer">{newTodo.length} {newTodo.length !== 1 ? 'items' : 'item'} left</p>
        		</div>
 			<div className="notepad1"></div>
 			<div className="notepad2"></div>
